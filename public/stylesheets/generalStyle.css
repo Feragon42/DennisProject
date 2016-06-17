@@ -1,0 +1,149 @@
+/***************************************Layout***********************************************/
+@import url(http://fonts.googleapis.com/css?family=Lato);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+body {
+  font-family:'Open Sans', 'Helvetica Neue', sans-serif;
+  background-image: url('../images/background.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+h1, h2, h3, h4, h5, h6  {  
+  font-family:'Lato', 'Helvetica Neue', sans-serif;
+}
+
+#logo{
+  max-width: 40%;
+  max-height: 80%;
+}
+
+#temporalMenu{
+  display: none;
+}
+
+/*********************************Index (Logic Screen)***************************************/
+#section{
+  position: absolute;
+  top: 30%;
+  left: 40%;
+  min-width: 275px;
+  min-height: 300px;
+}
+
+#section{
+  text-align: center;
+}
+
+.input{
+  text-align: left; 
+  position: relative;
+}
+
+.inputLogIcon{
+  text-align: right;
+  position: absolute;
+  top: 35px;
+  right: 10px;
+  bottom: 0;
+}
+
+#iconoLogin{
+  width: 40%;
+  height: 15%;
+}
+
+#displayMenu {
+  position: fixed;
+  top: 95%;
+  left: 90%;
+}
+
+#temporalMenu {
+  position: fixed;
+  top: 70%;
+  left: 75%;
+  width: 200px;
+}
+
+/*******************************************Admin******************************************/
+
+#actionsMenu{
+  position: relative;
+  top: 10%;
+}
+
+.actionIMG{
+  width: 120px;
+  height: 120px;
+}
+
+.actionList{
+  text-align: center;
+}
+
+.actionList ul {
+  padding: 0;
+}
+
+.actionOrderList{
+  padding-top: 30px;
+}
+
+/***************************************Recepcionista*************************************/
+
+.orderList{
+  position: relative;
+  background-color: white;
+  border-color: black;
+  border: groove;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  height: 80%;
+  overflow-y:auto; 
+}
+
+.order{
+  position: relative;
+  background-color: #66FF66;
+  padding: 5px 10px 5px 10px;
+  min-width: 30%;
+  border-color: black;
+  border: groove;
+  height: 400px;
+}
+
+.order .pl{
+  height: 150px;
+  overflow-y:auto;
+}
+
+#openCreateWindowBTN{
+  float: right;
+}
+
+.productQty {
+  width: 45px;
+}
+
+#blankOrder {
+  display: none;
+}
+
+.orderInfo{
+  font-size: 18pt;
+}
+
+.editButtons{
+  margin-left: 5px;
+  display: none;
+}
+
+/*************************************J. de Operaciones*************************************/
+
+.jdoButtons{
+  margin-left: 5px;
+}

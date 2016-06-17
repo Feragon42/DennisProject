@@ -1,0 +1,27 @@
+1. Que el usuario no se elimine. Deshabilitar (Campo en la bd) 8h
+	-Agregar campo de estado en la tabla usuario.
+	-Put a button in the EDIT and CREATE user interface
+	-Verificar en el login si el usuario esta inactivo o no.
+2. Cambiar interfaz de administrador (Usuario, Cliente, Producto, Operaciones) 6h
+	-Reordenar las imagenes
+	-Cambiar las imagenes
+3. No eliminar producto. 5h
+	-Crear campo de estado en la tabla de producto.
+	-Crear boton en CREAR y EDITAR producto, para poder cambiar el estado del producto.
+	-Logica para que, al mostrar los productos de el cliente, salte los deshabilitados.
+4. Decir si el producto es de indotel o externo. 10h
+	-Crear campo de estado en la tabla de producto.
+	-Crear boton para especificar si es propio o no.
+	-Crear menu para crear proveedor.
+	-Editar interfaz para mostrar proveedores en la creacion y edicion del producto.
+5. No eliminar ordenes de operacion 2h
+	-No eliminar orden al finalizar.
+	-No mostrar las ordenes que estan finalizadas en EDITAR orden.
+6. Guardar ordenes de operacion para resumen estadistico 15h
+	-Crear interfaz para mostrar todas las ordenes finalizadas, sumando todos los productos.
+7. Decir quien creo la orden, cuando (hora y fecha) y donde 18h 
+	-Crear campo en la tabla de ordenes para poner quien la creo y cuando
+	-Tomar nombre del usuario de la sesion cuando se crea o edita la orden.
+	-Tomar hora y fecha de la pc
+	-No dejar editar esto en el panel de Edicion
+8. Validacion de campo de usuario. (Username alfabetico, Password alfanumerico). 5h

@@ -1,0 +1,5 @@
+INSERT INTO users (username, name, email, password) 
+VALUES ('memberAdmin', 'Dennys Perez', 'dp@indotel.com', SHA1('adminpassword')),
+('memberRecepcionista', 'Ana Sanchez', 'as@indotel.com', SHA1('receppassword')),
+('memberJPlanta', 'Fernando Gonzalez', 'feragon42@gmail.com', SHA1('plantapassword')),
+('memberJOperaciones', 'Antonio Gutierrez', 'ag@indotel.com', SHA1('operapassword'));

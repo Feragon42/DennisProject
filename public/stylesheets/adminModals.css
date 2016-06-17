@@ -1,0 +1,47 @@
+.names {
+  padding-top: 8px;
+  padding-bottom: 10px;
+}
+
+.names:hover {
+  background-color: #BDBBAA;
+  color: white;
+  cursor: pointer;
+}
+
+.clients {
+  padding-top: 8px;
+  padding-bottom: 10px;
+}
+
+.clients:hover {
+  background-color: #BDBBAA;
+  color: white;
+  cursor: pointer;
+}
+
+.products {
+  padding-top: 8px;
+  padding-bottom: 10px;
+}
+
+.products:hover {
+  background-color: #BDBBAA;
+  color: white;
+  cursor: pointer;
+}
+
+.orders {
+  padding-top: 8px;
+  padding-bottom: 10px;
+}
+
+.orders:hover {
+  background-color: #BDBBAA;
+  color: white;
+  cursor: pointer;
+}
+
+.listOfProduct {
+  display: none;
+}
