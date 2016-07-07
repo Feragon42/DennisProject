@@ -29,7 +29,7 @@
                       <!-Status de la orden->
                       <label>Status de la Orden: </label><br>
                       <select class='form-control' id="<?php echo 'inputOrderStatus'.$i ?>">
-                        <?php $orderStatusArray = ['Por Revisar', 'Revisado', 'En Produccion'];
+                        <?php $orderStatusArray = ['Por Revisar', 'Revisado', 'En Produccion', 'Finalizado'];
                           for($j=0;$j<count($orderStatusArray);$j++){
                         ?>
                         <option value="<?php echo $orderStatusArray[$j] ?>" <?php if($orderStatusArray[$j]==$orderArray[$i]['status']){echo 'selected';}?>>
@@ -47,17 +47,26 @@
                         $productOrderArray = $af->admin_functions->retrieveInfoOrders('product_order', '*', 'orderp_id', $orderArray[$i]['orderp_id']);  
                         for($j=0;$j<count($productClientArray);$j++){
                           $proceed = true;
-                          $productName = $af->admin_functions->retrieveInfoOrders('product', 'product_name', 'product_id', $productClientArray[$j]['product_id']);
+                          $productName = $af->admin_functions->retrieveInfoOrders('product', '*', 'product_id', $productClientArray[$j]['product_id']);
                           for($k=0;$k<count($productOrderArray);$k++){
+                            $dispon = '';
+                            if($productName[0]['status']=='No Disponible'){
+                              $dispon='disabled';
+                            }
                             if($productClientArray[$j]['product_id'] == $productOrderArray[$k]['product_id']){
                       ?>
-                              <div>
-                                <label><input type='checkbox' name='productSelect' product_id="<?php echo $productClientArray[$j]['product_id']?>" checked> 
-                                  <?php echo $productName[0]['product_name']?>
-                                </label>
-                                <small> cant: </small>
-                                <input type='number' id="<?php echo 'qProduct'.$productClientArray[$j]['product_id']?>" 
-                                  placeholder='000' min='0' max ='999' class='productQty' value="<?php echo $productOrderArray[$k]['quantity']?>" >
+                              <div class='col-xs-12'>
+                                <div class='col-xs-6'>
+                                  <label><input type='checkbox' name='productSelect' product_id="<?php echo $productClientArray[$j]['product_id']?>" class='disponible' checked > 
+                                    <?php echo $productName[0]['product_name']?>
+                                  </label>
+                                </div>
+                                <div class='col-xs-6'>
+                                  <small> cant: </small>
+                                  <input type='number' id="<?php echo 'qProduct'.$productClientArray[$j]['product_id']?>" 
+                                    placeholder='0000000' min='0' max ='9999999' size='7'  style='width:80px;' class='productQty' value="<?php echo $productOrderArray[$k]['quantity']?>" >
+                                  <small> Und. </small>
+                                </div>
                               </div>
                       <?php
                               $proceed = false;
@@ -66,12 +75,19 @@
                           if($proceed){
                           
                       ?>
-                            <div>
-                              <label><input type='checkbox' name='productSelect' product_id="<?php echo $productClientArray[$j]['product_id']?>"> 
-                                <?php echo $productName[0]['product_name']?>
-                              </label>
-                              <small> cant: </small>
-                              <input type='number' id="<?php echo 'qProduct'.$productClientArray[$j]['product_id']?>" placeholder='000' min='0' max ='999' class='productQty'>
+                            <div class='col-xs-12'>
+                              <div class='col-xs-6'>
+                                <label><input type='checkbox' name='productSelect' product_id="<?php echo $productClientArray[$j]['product_id']?>" 
+                                  <?php echo $dispon ?>> 
+                                  <?php echo $productName[0]['product_name']?>
+                                </label>
+                              </div>
+                              <div class='col-xs-6'>
+                                <small> cant: </small>
+                                <input type='number' id="<?php echo 'qProduct'.$productClientArray[$j]['product_id']?>" 
+                                placeholder='0000000' min='0' max ='9999999' size='7'  style='width:80px;' class='productQty' <?php echo $dispon ?>>
+                                <small> Und. </small>
+                              </div>
                             </div>
                       <?php
                           }

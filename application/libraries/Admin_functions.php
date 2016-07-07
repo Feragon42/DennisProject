@@ -22,5 +22,20 @@
       $info = $t->admin_querys->retrieveInfo($table, $select, $whereQuery1, $whereQuery2);
       return $info;
     }
+    
+    /*-----------------------------------Funciones para mostrar estadisticas----------------------------------------------*/
+    public function orderNumbers(){
+      $t =& get_instance();
+      $t->load->model('admin_querys');
+      $info = $t->admin_querys->orderNumbers();
+      return $info;
+    }
+    
+    public function productNumbers(){
+      $t =& get_instance();
+      $t->load->model('admin_querys');
+      $info = $t->admin_querys->productNumbers();
+      return $info;
+    }
   }
 ?>

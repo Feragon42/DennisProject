@@ -16,6 +16,6 @@
           <span class='glyphicon glyphicon-asterisk inputLogIcon'>
         </div>
       <br>
-      <button type='submit' class='btn btn-primary'>Ingresar</button>
+      <button type='submit' class='btn btn-primary' id='loginBTN'>Ingresar</button>
     </form>
   </div>

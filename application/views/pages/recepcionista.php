@@ -1,6 +1,6 @@
-
 <div class='container orderList recepcionista'>
   <button class='btn btn-primary' data-toggle='modal' data-target='#createOrder'>Crear Orden</button>
+  <button class='btn btn-primary' id='showStatistics' data-toggle='modal' data-target='#statistics'>Mostrar Estadisticas</button>
   <br>
   <br>  
   <?php
@@ -47,19 +47,29 @@
             for($j=0;$j<count($productClientArray);$j++){
               $proceed = true;
               //Busco el nombre del producto segun su ID en la tabla de productos
-              $productName = $af->admin_functions->retrieveInfoOrders('product', 'product_name', 'product_id', $productClientArray[$j]['product_id']);
+              $productName = $af->admin_functions->retrieveInfoOrders('product', '*', 'product_id', $productClientArray[$j]['product_id']);
               //Muestro los productos
               for($k=0;$k<count($productOrderArray);$k++){
+                //Si el status del producto es igual a No Disponible, hara que la variable dispon sea disabled, desactivando todos los campos del producto.
+                $dispon = '';
+                if($productName[0]['status']=='No Disponible'){
+                  $dispon = 'disabled';
+                }
                 //Si el id del producto del cliente coinciden con el id del producto registrado en la orden, lo marco como checked
                 if($productClientArray[$j]['product_id'] == $productOrderArray[$k]['product_id']){
           ?>
-                  <div>
-                    <label><input type='checkbox' name='productSelect' product_id="<?php echo $productClientArray[$j]['product_id']?>" checked disabled> 
-                      <?php echo $productName[0]['product_name']?>
-                    </label>
-                    <small> cant: </small>
-                    <input type='number' id="<?php echo 'qProduct'.$productClientArray[$j]['product_id']?>" 
-                      placeholder='000' min='0' max ='999' class='productQty' value="<?php echo $productOrderArray[$k]['quantity']?>" disabled>
+                  <div class='col-xs-12'>
+                    <div class='col-xs-6'>
+                      <label><input type='checkbox' name='productSelect' product_id="<?php echo $productClientArray[$j]['product_id']?>" class='disponible' checked > 
+                        <?php echo $productName[0]['product_name']?>
+                      </label>
+                    </div>
+                    <div class='col-xs-6'>
+                      <small> cant: </small>
+                      <input type='number' id="<?php echo 'qProduct'.$productClientArray[$j]['product_id']?>" 
+                        placeholder='0000000' min='0' max ='9999999' size='7'  style='width:80px;' class='productQty' value="<?php echo $productOrderArray[$k]['quantity']?>" >
+                      <small> Und. </small>
+                    </div>
                   </div>
           <?php
                   $proceed = false; //<-- E indico que no vuelva a imprimir este producto
@@ -68,12 +78,19 @@
               if($proceed){ //<-- Si el producto no cumple para pasar por el if, igual se imprime pero sin el checked
               
           ?>
-                <div>
-                  <label><input type='checkbox' name='productSelect' product_id="<?php echo $productClientArray[$j]['product_id']?>" disabled> 
-                    <?php echo $productName[0]['product_name']?>
-                  </label>
-                  <small> cant: </small>
-                  <input type='number' id="<?php echo 'qProduct'.$productClientArray[$j]['product_id']?>" placeholder='000' min='0' max ='999' class='productQty' disabled>
+                <div class='col-xs-12'>
+                  <div class='col-xs-6'>
+                    <label><input type='checkbox' name='productSelect' product_id="<?php echo $productClientArray[$j]['product_id']?>" 
+                      <?php echo $dispon ?>> 
+                      <?php echo $productName[0]['product_name']?>
+                    </label>
+                  </div>
+                  <div class='col-xs-6'>
+                    <small> cant: </small>
+                    <input type='number' id="<?php echo 'qProduct'.$productClientArray[$j]['product_id']?>" 
+                    placeholder='0000000' min='0' max ='9999999' size='7'  style='width:80px;' class='productQty' <?php echo $dispon ?>>
+                    <small> Und. </small>
+                  </div>
                 </div>
           <?php
               }
@@ -81,18 +98,17 @@
           ?>
           </div>
                       
-          <button type='submit' class='btn btn-primary enableButtons' order-number="<?php echo $i?>">Editar</button>
           <button type='submit' 
                   id='orderEdit'
                   order_id="<?php echo $orderArray[$i]['orderp_id'] ?>"
                   client_id="<?php echo $orderArray[$i]['client_id'] ?>"
                   order-number="<?php echo $i?>"
-                  class='btn btn-success pull-right editButtons'>Guardar</button>
-           <button type='submit' 
+                  class='btn btn-success pull-right'>Guardar</button>
+          <button type='submit' 
                   id='orderDelete'
                   order_id="<?php echo $orderArray[$i]['orderp_id'] ?>"
                   order-number="<?php echo $i?>"
-                  class='btn btn-danger pull-right editButtons'>Eliminar</button>
+                  class='btn btn-danger pull-right'>Eliminar</button>
         </form>
       </div>
       

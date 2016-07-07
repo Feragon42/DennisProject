@@ -13,6 +13,7 @@
     <script type='text/javascript' src='public/scripts/adminSLogicClients.js'></script>
     <script type='text/javascript' src='public/scripts/adminSLogicProducts.js'></script>
     <script type='text/javascript' src='public/scripts/adminSLogicOrder.js'></script>
+    <script type='text/javascript' src='public/scripts/adminStatistics.js'></script>
     <script type='text/javascript' src='public/scripts/recepcionista.js'></script>
     <script type='text/javascript' src='public/scripts/jdOperaciones.js'></script>
     <script type='text/javascript' src='public/scripts/jdPlanta.js'></script>

@@ -43,6 +43,7 @@
       if($page=='recepcionista'){ //Se cargan los diferentes modelos, dependiendo del usuario que ingrese.
         $this->load->view('modals/adminModals/createOrder', $data);
       }
+      $this->load->view('modals/adminModals/statistics', $data);
       if($page=='admin'){
         $this->load->view('modals/adminModals/createUser', $data);
         $this->load->view('modals/adminModals/createClient', $data);
@@ -56,6 +57,7 @@
         $this->load->view('modals/adminModals/editOrder', $data);
         $this->load->view('modals/adminModals/deleteProduct', $data);
         $this->load->view('modals/adminModals/deleteOrder', $data);
+        
       }  
       $this->load->view('templates/footer', $data); //Se carga el footer, independientemente del usuario.
     }
@@ -70,19 +72,26 @@
       $this->load->library('session'); //Se carga la libreria de las sesiones.
       if($loginData == TRUE){ //Se ve si se realizo un login correcto (Usuario y contrasena coinciden).
         $x = $this->user_database->extractUserInfo($data); //Se usa el metodo de model/user_database para extraer la informacion de usuario de la base de datos.
-        if($x['userType']=='Administrador'){ //Se redirecciona a la pagina correspondiente segun el usuario registrado.
-          echo "<script> window.location.href='".base_url()."admin' </script>";
+        if($x['status']=='Activo'){//Se comprueba si el usuario esta activo
+          if($x['userType']=='Administrador'){ //Se redirecciona a la pagina correspondiente segun el usuario registrado.
+            echo "<script> window.location.href='".base_url()."admin' </script>";
+          }
+          if($x['userType']=='Recepcionista'){
+            echo "<script> window.location.href='".base_url()."recepcionista' </script>";
+          }
+          if($x['userType']=='Jefe de Planta'){
+            echo "<script> window.location.href='".base_url()."jdPlanta' </script>";
+          }
+          if($x['userType']=='Jefe de Operaciones'){
+            echo "<script> window.location.href='".base_url()."jdOperaciones' </script>";
+          }
+          $this->session->set_userdata($x); //Se crea la sesion con la informacion extraida de la base de datos.
         }
-        if($x['userType']=='Recepcionista'){
-          echo "<script> window.location.href='".base_url()."recepcionista' </script>";
+        else{
+          echo "<script> alert ('El Usuario esta inactivo. Contacte con administrador') 
+            window.location.href='".base_url()."'
+          </script>";
         }
-        if($x['userType']=='Jefe de Planta'){
-          echo "<script> window.location.href='".base_url()."jdPlanta' </script>";
-        }
-        if($x['userType']=='Jefe de Operaciones'){
-          echo "<script> window.location.href='".base_url()."jdOperaciones' </script>";
-        }
-        $this->session->set_userdata($x); //Se crea la sesion con la informacion extraida de la base de datos.
       }
       else{ //Muestra un aviso de error si no hay un login, y se redirecciona a la pagina de login.
         echo "<script> alert ('Error al iniciar sesion') 
@@ -176,6 +185,11 @@
     public function deleteOrder (){ //Llamado a la funcion para eliminar una orden desde admin, alojada en admin_querys.php
       $this->load->model('admin_querys');
       $this->admin_querys->orderDeleting($_POST);
+    }
+    
+    public function completeOrder (){ //Llamado a la funcion para eliminar una orden desde admin, alojada en admin_querys.php
+      $this->load->model('admin_querys');
+      $this->admin_querys->orderComplete($_POST);
     }
     
     public function showProductOrder (){ //Funcion para obtener los productos emparejados con el cliente respectivo

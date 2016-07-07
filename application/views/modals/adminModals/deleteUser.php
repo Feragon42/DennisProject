@@ -3,10 +3,10 @@
         <div class='modal-content'>
           <div class='modal-header'>
             <button class='close' type='button' data-dismiss='modal' &times>X</button>
-            <h2 class='modal-title'>Borrar Usuario</h2>
+            <h2 class='modal-title'>Desactivar Usuario</h2>
           </div>
           <div class='modal-body'>
-            <p>Haga click en el usuario que desee eliminar.</p><br>
+            <p>Haga click en el usuario que desee desactivar.</p><br>
             <?php
               $af =& get_instance();
               $af->load->library('admin_functions');
@@ -14,6 +14,7 @@
               $length = count($userArray);
               if($length!=0){
                 for($i=0;$i<$length;$i++){
+                  if($userArray[$i]['status']=='Activo'){
                 ?>
                   <div class='names' open_id="<?php echo 'user'.$i ?>">
                     <h3>
@@ -26,7 +27,7 @@
                   
                   <div id="<?php echo 'user'.$i ?>" style='display:none;' class='text-center'>
                     
-                    <label>Seguro que desea elimar al usuario <label id="<?php echo 'username'.$i ?>" style='color:blue;'><?php echo $userArray[$i]['username']; ?></label></label>
+                    <label>Seguro que desea desactivar al usuario <label id="<?php echo 'username'.$i ?>" style='color:blue;'><?php echo $userArray[$i]['username']; ?></label></label>
                     <br>
                     <small>Este usuario es <?php echo $userArray[$i]['userType']; ?>, puede contactarlo por el correo <?php echo $userArray[$i]['email']; ?>.</small>
                     <br><br>
@@ -39,6 +40,7 @@
                   
                   <hr>
             <?php
+                  }
                 }
               }
               else{

@@ -20,24 +20,20 @@
                 </select>
                 
                 <br>
-                <!-Clientes para  el producto->
-                <label>Clientes a los que se le ofrece el producto:</label><br>
-                <?php
-                  $af =& get_instance();
-                  $af->load->library('admin_functions');
-                  $clientArray = $af->admin_functions->showData('client');
-                  $lengthP = count($clientArray);
-                  if($lengthP!=0){
-                    for($j=0;$j<$lengthP;$j++){
-                ?>
-                    <label><input type='checkbox' name='clientSelect' value="<?php echo $clientArray[$j]['client_id'] ?>"><?php echo $clientArray[$j]['client_name'] ?></label><br>
-                <?php
-                    }
-                  }
-                  else{
-                    echo "<h3>No hay productos que ofrecer</h3>";
-                  }
-                ?>
+                
+                <label for='inputStatusProduct'>Estado de articulo: </label>
+                <select class='form-control' style='width:40%;' id='inputStatusProduct'>
+                  <option value='Disponible'>Disponible</option>
+                  <option value='No Disponible'>No Disponible</option>
+                </select>
+                
+                <br>
+                
+                <label for='inputSupplierProduct'>Proveedor*: </label>
+                <input type='text' class='form-control' id='inputSupplierProduct' placeholder='Ejm: Jabonera Maracay'>
+                <small>*Si no tiene, coloque N/A</small><br>
+                
+                
               </div>
     
               <br>

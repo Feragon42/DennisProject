@@ -6,7 +6,7 @@
             <h2 class='modal-title'>Borrar Producto</h2>
           </div>
           <div class='modal-body'>
-            <p>Haga click en el producto que desee eliminar.</p><br>
+            <p>Haga click en el producto que desee eliminar. Si lo que prefiere es indicar que no esta disponible, por favor indiquelo en EDITAR PRODUCTO</p><br>
             <?php
               $af =& get_instance();
               $af->load->library('admin_functions');

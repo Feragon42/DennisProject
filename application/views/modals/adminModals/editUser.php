@@ -27,7 +27,7 @@
                       <div class='form-group'>
                         <label class='control-label col-xs-4'>Nombre de Usuario:</label>
                         <div class='control-label col-xs-8'>
-                          <input type='name' class='form-control' id="<?php echo 'inputUser'.$i ?>" placeholder='<?php echo $userArray[$i]['username'] ?>'>
+                          <input type='name' class='form-control' id="<?php echo 'inputUser'.$i ?>" value='<?php echo $userArray[$i]['username'] ?>'>
                         </div>
                       </div>
                         
@@ -35,15 +35,15 @@
                       <div class='form-group'>
                         <label class='control-label col-xs-4'>Nombre Completo:</label>
                         <div class='control-label col-xs-8'>
-                          <input type='text' class='form-control' id="<?php echo 'inputName'.$i ?>" placeholder='<?php echo $userArray[$i]['name'] ?>'>
+                          <input type='text' class='form-control' id="<?php echo 'inputName'.$i ?>" value='<?php echo $userArray[$i]['name'] ?>'>
                         </div>
                       </div>
                         
                       <!-Correo del usuario->
                       <div class='form-group'>
-                        <label class='control-label col-xs-4'>Nombre de Usuario:</label>
+                        <label class='control-label col-xs-4'>Correo de Usuario:</label>
                         <div class='control-label col-xs-8'>
-                          <input type='email' class='form-control' id="<?php echo 'inputEmail'.$i ?>" placeholder='<?php echo $userArray[$i]['email'] ?>'>
+                          <input type='email' class='form-control' id="<?php echo 'inputEmail'.$i ?>" value='<?php echo $userArray[$i]['email'] ?>'>
                         </div>
                       </div>
                         
@@ -80,10 +80,28 @@
                           </select>
                         </div>
                       </div>
+                      
+                      <!-Status->
+                      <div class='form-group'>
+                        <label class='control-label col-xs-4'>Estado:</label>
+                        <div class='control-label col-xs-4'>
+                          <select class='form-control' id="<?php echo 'inputUserStatus'.$i ?>">
+                            <?php $userStatusArray = ['Activo', 'Inactivo'];
+                              for($j=0;$j<count($userStatusArray);$j++){
+                            ?>
+                            <option value="<?php echo $userStatusArray[$j] ?>" <?php if($userStatusArray[$j]==$userArray[$i]['status']){echo 'selected';}?>>
+                              <?php echo $userStatusArray[$j] ?>
+                            </option>
+                            <?php
+                              }
+                            ?>
+                          </select>
+                        </div>
+                      </div>
                         
                       <!-Boton para enviar->
                       <br>
-                        <button class='btn btn-primary btn-group-xs' id='userEdit' user_number="<?php echo $i ?>" user_id="<?php echo $userArray[$i]['user_id'] ?>">Editar Usuario</button>
+                        <button class='btn btn-primary btn-group-xs' id='userEdit' user_number="<?php echo $i ?>" user_id="<?php echo $userArray[$i]['user_id'] ?>">Guardar Cambios</button>
                     </form>                      
                   </div>
                   <hr> 

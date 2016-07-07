@@ -18,6 +18,17 @@ function inputBlank (zone) {
   return blank;
 }
 
+function verifyConstitution (username, password){ // Funcion para verificar la composicion del username y el password.
+  var verified = false;
+  if (/^([0-9]|[a-z])+([0-9a-z]+)$/i.test(password)){
+    verified = true;
+  }
+  else{
+    verified = false;
+  }
+  return verified;
+}
+
 /*---------------- Create User-----------------*/
 
 $('#passGenerator').on('click', function(evt){
@@ -36,34 +47,42 @@ $('#passGenerator').on('click', function(evt){
 });
 
 $('#userCreation').on('click', function(evt){
-  if(passMatch()){ //Revisar si las contrasenas coinciden
-    if(inputBlank('createUser')===false){ //Revisar si no hay campos vacios
-      $.ajax({
-        type: "POST",
-        url: "pages/createUser",
-        data: {
-          username: $('#inputUser').val(),
-          name: $('#inputName').val(),
-          email: $('#inputEmail').val(),
-          password: $('#inputPassword').val(),
-          userType: $('#inputUserType').val()
-        },
-        dataType: "text",
-        cache:false,
-        success: 
-          function (){alert('Usuario creado satisfactoriamente')}
-      });
+  var user = $('#inputUser').val(), pass = $('#inputPassword').val();
+  if(verifyConstitution(user, pass)){
+    if(passMatch()){ //Revisar si las contrasenas coinciden
+      if(inputBlank('createUser')===false){ //Revisar si no hay campos vacios
+        $.ajax({
+          type: "POST",
+          url: "pages/createUser",
+          data: {
+            username: user,
+            name: $('#inputName').val(),
+            email: $('#inputEmail').val(),
+            password: pass,
+            userType: $('#inputUserType').val(),
+            status: 'Activo'
+          },
+          dataType: "text",
+          cache:false,
+          success: 
+            function (){alert('Usuario creado satisfactoriamente')}
+        });
+      }
+      else{
+        evt.preventDefault();
+        alert('No deje campos vacios');
+      } 
     }
-    else{
+    else {
       evt.preventDefault();
-      alert('No deje campos vacios');
-    } 
+      alert('Las contrasenas no coinciden');
+      
+    }
   }
   else {
     evt.preventDefault();
-    alert('Las contrasenas no coinciden');
-    
-  }  
+    alert('La contrasena debe ser alfanumerica y contener mayusculas y minusculas.')
+  }
 });
 
 /*------------------Edit User-----------------*/
@@ -87,7 +106,8 @@ $('#editUser #userEdit').on('click', function(evt){
           name: $('#user'+n+' #inputName'+n).val(),
           email: $('#user'+n+' #inputEmail'+n).val(),
           password: $('#user'+n+' #inputPassword'+n).val(),
-          userType: $('#user'+n+' #inputUserType'+n).val()
+          userType: $('#user'+n+' #inputUserType'+n).val(),
+          status: $('#user'+n+' #inputUserStatus'+n).val(),
         },
         dataType: "text",
         cache:false,
@@ -124,6 +144,6 @@ $('#deleteUser #userDelete').on('click', function(){
     dataType: "text",
     cache:false,
     success:
-      function(){alert('Usuario eliminado satisfactoriamente')}
+      function(){alert('Usuario desactivado satisfactoriamente')}
   });
 });

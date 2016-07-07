@@ -1,5 +1,7 @@
-
-<div class='container orderList jdPlanta'>  
+<div class='container orderList jdOperaciones'>
+  <button class='btn btn-primary' id='showStatistics' data-toggle='modal' data-target='#statistics'>Mostrar Estadisticas</button>
+  <br>
+  <br>
   <?php
     $af =& get_instance();
     $af->load->library('admin_functions');
@@ -9,16 +11,19 @@
     if($length!=0){
       for($i=0;$i<$length;$i++){
         //La recepcionista solo puede ver las ordenes por revisar
-        if($orderArray[$i]['status'] == 'Por revision'){
+        if($orderArray[$i]['status'] == 'Revisado' || $orderArray[$i]['status'] == 'En Produccion'){
           $noOrders = FALSE;
   ?>
       <div id="<?php echo 'order'.$i?>" class='order col-lg-4'>
+        <div class='printHeader'>
+          <img src='public/images/logo.png'><br>
+        </div>
         <form method='POST' class='form-horizontal'>
           
           <!-ID DE LA ORDEN->
           <label>Order Id: <b class='orderInfo'><?php echo $orderArray[$i]['orderp_id']?></b></label>
           <br><small> Se le asigna automaticamente al registrar la orden.</small>
-          <br><label>Status: <b class='orderInfo'>Por revision</b></label>
+          <br><label>Status: <b class='orderInfo'><?php echo $orderArray[$i]['status']?></b></label>
 
           <!-Cliente->
           <div>
@@ -34,61 +39,57 @@
           
           <!-Lista de producctos->
           <h3>PRODUCTOS</h3>
-          <div id="<?php echo 'selectProductOrder'.$i ?>" class='pl'>
+          <ul id="<?php echo 'selectProductOrder'.$i ?>" class='pl'>
           <?php
-            //Busco todos los ID relacionados con el id del cliente en la tabla product_client
-            $productClientArray = $af->admin_functions->retrieveInfoOrders('product_client', 'product_id', 'client_id', $orderArray[$i]['client_id']);
             //Busco el id y la cantidad de los productos de la orden en product_order
             $productOrderArray = $af->admin_functions->retrieveInfoOrders('product_order', '*', 'orderp_id', $orderArray[$i]['orderp_id']);  
-            //Muestro todos los productos del cliente
-            for($j=0;$j<count($productClientArray);$j++){
-              $proceed = true;
+            for($j=0;$j<count($productOrderArray);$j++){
               //Busco el nombre del producto segun su ID en la tabla de productos
-              $productName = $af->admin_functions->retrieveInfoOrders('product', 'product_name', 'product_id', $productClientArray[$j]['product_id']);
-              //Muestro los productos
-              for($k=0;$k<count($productOrderArray);$k++){
-                //Si el id del producto del cliente coinciden con el id del producto registrado en la orden, lo marco como checked
-                if($productClientArray[$j]['product_id'] == $productOrderArray[$k]['product_id']){
+              $productName = $af->admin_functions->retrieveInfoOrders('product', 'product_name', 'product_id', $productOrderArray[$j]['product_id']);
           ?>
+                <li>
                   <div>
-                    <label><input type='checkbox' name='productSelect' product_id="<?php echo $productClientArray[$j]['product_id']?>" checked> 
+                    <label class='productID' product_id="<?php echo $productOrderArray[$j]['product_id']?>">
                       <?php echo $productName[0]['product_name']?>
                     </label>
                     <small> cant: </small>
-                    <input type='number' id="<?php echo 'qProduct'.$productClientArray[$j]['product_id']?>" 
-                      placeholder='000' min='0' max ='999' class='productQty' value="<?php echo $productOrderArray[$k]['quantity']?>">
+                    <label id="<?php echo 'qProduct'.$productOrderArray[$j]['product_id']?>" product_quantity="<?php echo $productOrderArray[$j]['quantity']?>">
+                      <?php echo $productOrderArray[$j]['quantity']?> 
+                    </label>
+                    <small> Und. </small>
                   </div>
+                </li>  
           <?php
-                  $proceed = false; //<-- E indico que no vuelva a imprimir este producto
                 }
-              }
-              if($proceed){ //<-- Si el producto no cumple para pasar por el if, igual se imprime pero sin el checked
-              
           ?>
-                <div>
-                  <label><input type='checkbox' name='productSelect' product_id="<?php echo $productClientArray[$j]['product_id']?>"> 
-                    <?php echo $productName[0]['product_name']?>
-                  </label>
-                  <small> cant: </small>
-                  <input type='number' id="<?php echo 'qProduct'.$productClientArray[$j]['product_id']?>" placeholder='000' min='0' max ='999' class='productQty'>
-                </div>
+          </ul>
+
+          <button class='btn btn-succes printOrder' order-number="<?php echo $i?>">
+            <span class="glyphicon glyphicon-print"></span>     
+          </button>
+          
+          <!-Botones de Finalizar o Pasar a produccion->
           <?php
-              }
-            }
+            if($orderArray[$i]['status'] == 'En Produccion'){
           ?>
-          </div>
-                      
-          <button type='submit' 
-                  id='orderEdit'
+            <button id='orderComplete'
+                  order_id="<?php echo $orderArray[$i]['orderp_id'] ?>"
+                  order-number="<?php echo $i?>" 
+                  class='btn btn-danger pull-right jdoButtons'>Finalizar Orden</button>   
+                  
+          <?php
+            }
+            else{
+          ?>
+            <button id='orderEdit'
                   order_id="<?php echo $orderArray[$i]['orderp_id'] ?>"
                   client_id="<?php echo $orderArray[$i]['client_id'] ?>"
-                  order-number="<?php echo $i?>"
-                  class='btn btn-success pull-right jdoButtons'>Enviar a Produccion</button>
-           <button type='submit' 
-                  id='orderDelete'
-                  order_id="<?php echo $orderArray[$i]['orderp_id'] ?>"
-                  order-number="<?php echo $i?>"
-                  class='btn btn-danger pull-right jdoButtons'>Eliminar</button>
+                  order-number="<?php echo $i?>" 
+                  class='btn btn-primary pull-right jdoButtons'>Pasar a Produccion</button>      
+          <?php
+            }
+          ?>
+          
         </form>
       </div>
       

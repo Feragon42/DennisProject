@@ -27,7 +27,7 @@
                       <div class='form-group'>
                         <label class='control-label col-xs-4'>Nombre del Cliente:</label>
                         <div class='control-label col-xs-8'>
-                          <input type='name' class='form-control' id="<?php echo 'inputNameClient'.$i ?>" placeholder='<?php echo $clientArray[$i]['client_name'] ?>'>
+                          <input type='name' class='form-control' id="<?php echo 'inputNameClient'.$i ?>" value='<?php echo $clientArray[$i]['client_name'] ?>'>
                         </div>
                       </div>
                       
@@ -35,7 +35,7 @@
                       <div class='form-group'>
                         <label class='control-label col-xs-4'>Direccion del Cliente:</label>
                         <div class='control-label col-xs-8'>
-                          <input type='text' class='form-control' id="<?php echo 'inputDirection'.$i ?>" placeholder='<?php echo $clientArray[$i]['client_direction'] ?>'>
+                          <input type='text' class='form-control' id="<?php echo 'inputDirection'.$i ?>" value='<?php echo $clientArray[$i]['client_direction'] ?>'>
                         </div>
                       </div>
                       
@@ -43,7 +43,7 @@
                       <div class='form-group'>
                         <label class='control-label col-xs-4'>Telefono del Cliente:</label>
                         <div class='control-label col-xs-8'>
-                          <input type='text' class='form-control' id="<?php echo 'inputTelph'.$i ?>" placeholder='<?php echo $clientArray[$i]['client_telph'] ?>'>
+                          <input type='text' class='form-control' id="<?php echo 'inputTelph'.$i ?>" value='<?php echo $clientArray[$i]['client_telph'] ?>'>
                         </div>
                       </div>
                       
@@ -51,7 +51,7 @@
                       <div class='form-group'>
                         <label class='control-label col-xs-4'>Correo del Cliente:</label>
                         <div class='control-label col-xs-8'>
-                          <input type='email' class='form-control' id="<?php echo 'inputEmailClient'.$i ?>" placeholder='<?php echo $clientArray[$i]['client_email'] ?>'>
+                          <input type='email' class='form-control' id="<?php echo 'inputEmailClient'.$i ?>" value='<?php echo $clientArray[$i]['client_email'] ?>'>
                         </div>
                       </div>
                       
@@ -59,12 +59,28 @@
                       <label>Productos que se le ofrecen al cliente:</label><br>
                       <?php
                         $productArray = $af->admin_functions->showData('product');
+                        $productClientArray = $af->admin_functions->retrieveInfoOrders('product_client', 'product_id', 'client_id', $clientArray[$i]['client_id']);
                         $lengthP = count($productArray);
                         if($lengthP!=0){
                           for($j=0;$j<$lengthP;$j++){
+                            for($k=0;$k<count($productClientArray);$k++){
+                              $checked='';
+                              if($productArray[$j]['product_id']==$productClientArray[$k]['product_id']){
+                                $checked='checked';
+                                break;
+                              }
+                            }
                       ?>
-                          <label><input type='checkbox' name='productSelect<?php echo $i ?>' value="<?php echo $productArray[$j]['product_id'] ?>"><?php echo $productArray[$j]['product_name'] ?></label><br>
+                          <label><input type='checkbox' name='productSelect<?php echo $i ?>' value="<?php echo $productArray[$j]['product_id'] ?>" 
+                            <?php //Evalua la disponibilidad del producto para ponerlo disabled
+                              if($productArray[$j]['status']=='No Disponible' && $checked==''){
+                                echo 'disabled';
+                              }
+                            ?>
+                          <?php echo $checked ?>><?php echo $productArray[$j]['product_name'] ?></label><br>
                       <?php
+                              
+                            
                           }
                         }
                         else{

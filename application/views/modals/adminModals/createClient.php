@@ -51,7 +51,13 @@
                   if($lengthP!=0){
                     for($j=0;$j<$lengthP;$j++){
                 ?>
-                    <label><input type='checkbox' name='productSelect' value="<?php echo $productArray[$j]['product_id'] ?>"> <?php echo $productArray[$j]['product_name'] ?></label><br>
+                    <label><input type='checkbox' name='productSelect' value="<?php echo $productArray[$j]['product_id'] ?>"
+                      <?php //Evalua la disponibilidad del producto para ponerlo disabled
+                        if($productArray[$j]['status']=='No Disponible'){
+                          echo 'disabled';
+                        }
+                      ?>
+                    > <?php echo $productArray[$j]['product_name'] ?></label><br>
                 <?php
                     }
                   }

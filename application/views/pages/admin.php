@@ -1,88 +1,62 @@
+
+  <button class='btn btn-primary' id='showStatistics' data-toggle='modal' data-target='#statistics'>Mostrar Estadisticas</button>
     
     <div id='actionsMenu'>
-      <div class='col-xs-4'>
-        <div class='actionList'>
-          <img src='public/images/create_user.png' class='actionImg'>
-          <ul class='dropdown'>
-            <a data-toggle='dropdown' class='dropdown-toggle btn btn-primary' href='#'>
-              Crear Personas <b class='caret'></b>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="#" data-toggle='modal' data-target='#createUser'>Crear Usuario</a></li>
-              <li><a href="#" data-toggle='modal' data-target='#createClient'>Crear Cliente</a></li>
-            </ul>
-          </ul>
-        </div>
-      </div>
-      <div class='col-xs-4'>
-        <div class='actionList'>
-          <img src='public/images/edit_user.png' class='actionImg'>
-          <ul class='dropdown'>
-            <a data-toggle='dropdown' class='dropdown-toggle btn btn-primary' href='#'>
-              Editar Personas <b class='caret'></b>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="#" data-toggle='modal' data-target='#editUser'>Editar Usuario</a></li>
-              <li><a href="#" data-toggle='modal' data-target='#editClient'>Editar Cliente</a></li>
-            </ul>
-          </ul>
-        </div>
-      </div>
-      <div class='col-xs-4'>
-        <div class='actionList'>
-          <img src='public/images/delete_user.png' class='actionImg'>
-          <ul class='dropdown'>
-            <a data-toggle='dropdown' class='dropdown-toggle btn btn-primary' href='#'>
-              Borrar Persona <b class='caret'></b>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="#" data-toggle='modal' data-target='#deleteUser'>Borrar Usuario</a></li>
-              <li><a href="#" data-toggle='modal' data-target='#deleteClient'>Borrar Cliente</a></li>
-            </ul>
-          </ul>
-        </div>
+      
+      <div class='col-lg-3 col-xs-6 actionList'>
+        <img src='public/images/user.png' class='typeImg' title='Usuarios'>
+        <h4> Usuarios </h2>
+        <a href="#" data-toggle='modal' data-target='#createUser'>
+          <img src='public/images/create_order.png' class='actionImg' title='Crear Usuario'>
+        </a>  
+        <a href="#" data-toggle='modal' data-target='#editUser'>
+          <img src='public/images/edit_order.png' class='actionImg' title='Editar Usuario'>
+        </a> 
+        <a href="#" data-toggle='modal' data-target='#deleteUser'>
+          <img src='public/images/delete_order.ico' class='actionImg' title='Desactivar Usuario'>
+        </a> 
       </div>
       
-      <div class='col-xs-4 actionOrderList'>
-        <div class='actionList'>
-          <img src='public/images/create_order.png' class='actionImg'>
-          <ul class='dropdown'>
-            <a data-toggle='dropdown' class='dropdown-toggle btn btn-primary' href='#'>
-              Crear Objetos <b class='caret'></b>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="#" data-toggle='modal' data-target='#createProduct'>Crear Producto</a></li>
-              <li><a href="#" data-toggle='modal' data-target='#createOrder'>Crear Ordenes de Produccion</a></li>
-            </ul>
-          </ul>
-        </div>
+      <div class='col-lg-3 col-xs-6 actionList'>
+        <img src='public/images/client.png' class='typeImg' title='Clientes'>
+        <h4> Clientes </h2>
+        <a href="#" data-toggle='modal' data-target='#createClient'>
+          <img src='public/images/create_order.png' class='actionImg' title='Crear Cliente'>
+        </a>  
+        <a href="#" data-toggle='modal' data-target='#editClient'>
+          <img src='public/images/edit_order.png' class='actionImg' title='Editar Cliente'>
+        </a> 
+        <a href="#" data-toggle='modal' data-target='#deleteClient'>
+          <img src='public/images/delete_order.ico' class='actionImg' title='Borrar Cliente'>
+        </a>  
       </div>
-      <div class='col-xs-4 actionOrderList'>
-        <div class='actionList'>
-          <img src='public/images/edit_order.png' class='actionImg'>
-          <ul class='dropdown'>
-            <a data-toggle='dropdown' class='dropdown-toggle btn btn-primary' href='#'>
-              Editar Objetos <b class='caret'></b>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="#" data-toggle='modal' data-target='#editProduct'>Editar Producto</a></li>
-              <li><a href="#" data-toggle='modal' data-target='#editOrder'>Editar Ordenes de Produccion</a></li>
-            </ul>
-          </ul>
-        </div>
+      
+      <div class='col-lg-3 col-xs-6 actionList'>
+        <img src='public/images/soup.png' class='typeImg' title='Articulos'>
+        <h4> Articulos </h2>
+        <a href="#" data-toggle='modal' data-target='#createProduct'>
+          <img src='public/images/create_order.png' class='actionImg' title='Crear Articulo'>
+        </a>  
+        <a href="#" data-toggle='modal' data-target='#editProduct'>
+          <img src='public/images/edit_order.png' class='actionImg' title='Editar Articulo'>
+        </a> 
+        <a href="#" data-toggle='modal' data-target='#deleteProduct'>
+          <img src='public/images/delete_order.ico' class='actionImg' title='Borrar Articulo'>
+        </a> 
       </div>
-      <div class='col-xs-4 actionOrderList'>
-        <div class='actionList'>
-          <img src='public/images/delete_order.ico' class='actionImg'>
-          <ul class='dropdown'>
-            <a data-toggle='dropdown' class='dropdown-toggle btn btn-primary' href='#'>
-              Borrar Objetos <b class='caret'></b>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="#" data-toggle='modal' data-target='#deleteProduct'>Eliminar Producto</a></li>
-              <li><a href="#" data-toggle='modal' data-target='#deleteOrder'>Eliminar Ordenes de Produccion</a></li>
-            </ul>
-          </ul>
-        </div>
+      
+      <div class='col-lg-3 col-xs-6 actionList'>
+        <img src='public/images/order.png' class='typeImg' title='Ordenes de Produccion'>
+        <h4> Ordenes </h2>
+        <a href="#" data-toggle='modal' data-target='#createOrder'>
+          <img src='public/images/create_order.png' class='actionImg' title='Crear Orden de Produccion'>
+        </a>  
+        <a href="#" data-toggle='modal' data-target='#editOrder'>
+          <img src='public/images/edit_order.png' class='actionImg' title='Editar Orden de Produccion'>
+        </a> 
+        <a href="#" data-toggle='modal' data-target='#deleteOrder'>
+          <img src='public/images/delete_order.ico' class='actionImg' title='Borrar Orden de Produccion'>
+        </a> 
       </div>
+
     </div>

@@ -37,8 +37,11 @@
     }
     
     public function userDeleting($data){ //Funcion para eliminar un usuario, llamada en Page.php con la el ajax enviado en adminSLogic.js
-      $this->db->where('username', $data['username']);
-      $this->db->delete('user', $data);
+      $query="UPDATE user 
+          SET status = 'Inactivo'
+          WHERE username = '".$data['username']."';";
+      $this->db->query($query);
+
     }
     
     //------------------------------------------Funciones para cargar clientes------------------------------------------//
@@ -107,42 +110,12 @@
     //------------------------------------------Funciones para cargar Productos------------------------------------------//
     
     public function productCreation($data){ //Funcion para crear un producto, llamada en Page.php con la el ajax enviado en adminSLogic.js
-      //Se usa el query largo, en lugar del simplificado, para poder hacer uso del array enviado en el ajax para guardar tambien los productos.
-      $query = "INSERT INTO product(product_name, product_type) 
-                VALUES ('".$data['product_name']."', '".$data['product_type']."');";
-      $this->db->query($query);
-      
-      //Luego, se obtiene el id del producto que se acaba de crear.
-      $this->db->select('product_id');
-      $this->db->from('product');
-      $this->db->where('product_name', $data['product_name']);
-      $result = $this->db->get();
-      $newProductID = $result->row();
-      
-      //Para finalmente guardar en la base de datos todos los productos seleccionados
-      foreach ($data['product_client'] as $clientID) {
-        $queryProduct = "INSERT INTO product_client(client_id, product_id) VALUES ('".$clientID."', '".$newProductID->product_id."');";
-        $this->db->query($queryProduct);
-      }
+      $this->db->insert('product', $data);
     }
     
     public function productEdition($data){ //Funcion para editar un producto, llamada en Page.php con la el ajax enviado en adminSLogic.js
-      //Se usa el query largo, en lugar del simplificado, para poder hacer uso del array enviado en el ajax para guardar tambien los productos.
-      $query="UPDATE product 
-              SET product_name = '".$data['product_name']."', 
-                  product_type = '".$data['product_type']."'
-              WHERE product_id = '".$data['product_id']."';";
-      $this->db->query($query);
-      
-      //Y para guardar los nuevos productos Primero se borran todos los productos que respondan al id del cliente.
-      $queryDeleteProduct ="DELETE FROM product_client WHERE product_id = '".$data['product_id']."';";
-      $this->db->query($queryDeleteProduct);
-      
-      //Para luego agregar los nuevos.
-      foreach ($data['product_client'] as $clientID) {        
-        $queryProduct = "INSERT INTO product_client(client_id, product_id) VALUES ('".$clientID."', '".$data['product_id']."');";
-        $this->db->query($queryProduct);
-      }
+      $this->db->where('product_id', $data['product_id']);
+      $this->db->update('product', $data);
     }
     
     public function productDeleting($data){ //Funcion para editar un producto, llamada en Page.php con la el ajax enviado en adminSLogic.js
@@ -249,5 +222,28 @@
       $this->db->query($queryDeleteProduct);
     }
     
+    public function orderComplete($data){ //Funcion para editar un producto, llamada en Page.php con la el ajax enviado en adminSLogic.js
+      //Se usa el query largo, en lugar del simplificado, para poder hacer uso del array enviado en el ajax para guardar tambien los productos.
+      $query="UPDATE orderp 
+              SET status = '".$data['status']."'
+              WHERE orderp_id = '".$data['order_id']."';";
+      $this->db->query($query);
+      
+    }
+    
+    
+   //--------------------------------------------------Funciones para Estadisticas-------------------------------------------------//
+    
+    public function orderNumbers(){//Funcion para obtener el numero de ordenes detallado
+      $query="SELECT status, COUNT(*) FROM orderp GROUP BY status";
+      $infoArray = $this->db->query($query);
+      return $infoArray;
+    }
+    
+    public function productNumbers(){//Function para obtener el numero de productos detallado
+      $query="SELECT product_id, sum(quantity) as suma FROM product_order GROUP BY product_id";
+      $infoArray=$this->db->query($query);
+      return $infoArray;
+    }
   }
 ?>

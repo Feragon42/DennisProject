@@ -1,18 +1,14 @@
 /*---------------- Create product-----------------*/
 $('#productCreation').on('click', function(evt){
   if(inputBlank('createProduct')===false){ //Revisar si no hay campos vacios, funcion alojada en scripts/adminSLogicUsers.js
-    var arrayClient = [];
-    $('#createProduct input[name="clientSelect"]:checked').each(function(){
-      arrayClient.push(this.value);
-    })
-    
     $.ajax({ // AJAX para guardar la informacion del cliente en la tabla client.
       type: "POST",
       url: "pages/createProduct",
       data: {
         product_name: $('#inputNameProduct').val(),
         product_type: $('#inputTypeProduct').val(),
-        product_client: arrayClient
+        status: $('#inputStatusProduct').val(),
+        supplier: $('#inputSupplierProduct').val()
       },
       dataType: "text",
       cache:false,
@@ -23,7 +19,7 @@ $('#productCreation').on('click', function(evt){
   else{
     evt.preventDefault();
     alert('No deje campos vacios');
-  } 
+  }
 });
 
 /*------------------Edit product-----------------*/
@@ -38,10 +34,6 @@ $('#editProduct .products').on('click', function(){
 $('#editProduct #productEdit').on('click', function(evt){
   var n=$(this).attr('product_number'); //Se obtiene el numero del perfil que se esta editando
   var idN = $(this).attr('product_id'); //Se obtiene el id del producto que se va a editar
-  var arrayClient = [];
-  $('#editProduct input[name="clientSelect'+n+'"]:checked').each(function(){
-    arrayClient.push(this.value);
-  })
     
   if($('#product'+n+' input').val()!=''){ //Revisar si no hay campos vacios, funcion alojada en scripts/adminSLogicUsers.js
     $.ajax({ // AJAX para guardar la informacion del producto en la tabla client.
@@ -51,7 +43,8 @@ $('#editProduct #productEdit').on('click', function(evt){
         product_id: idN,
         product_name: $('#product'+n+' #inputNameProduct'+n).val(),
         product_type: $('#product'+n+' #inputTypeProduct'+n).val(),
-        product_client: arrayClient
+        status: $('#product'+n+' #inputStatusProduct'+n).val(),
+        supplier: $('#product'+n+' #inputSupplierProduct'+n).val()
       },
       dataType: "text",
       cache:false,

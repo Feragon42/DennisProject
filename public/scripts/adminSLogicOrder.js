@@ -14,11 +14,22 @@ function showProducts(modal){
     $('#'+modal+' .listOfProduct').empty(); //Se vacia el area donde se mostraran los productos, por si no es la primera vez que se clickeo un cliente
     $('#'+modal+' .listOfProduct').append('<h3> Lista de Productos a ofrecer </h3>');
     $.each(productArray, function(field){ //Y, por cada producto en el array, se muestran los datos siguiente.
+      var dispon = '';
+      if(productArray[i]['status']=='No Disponible'){
+        dispon = 'disabled';
+      }
+      console.log(dispon)
       $('#'+modal+' .listOfProduct').append(
-          "<label><input type='checkbox' name='productSelect' product_id="+productArray[i]['product_id']+"> "+productArray[i]['product_name']+"</label>",
-          "<small> cant: </small>",
-          "<input type='number' id='qProduct"+productArray[i]['product_id']+"' placeholder='000' min='0' max ='999' class='productQty'></input>",
-          "<br>"); 
+          "<div class='col-xs-12>",
+            "<div class='col-xs-6>",
+              "<label><input type='checkbox' name='productSelect' product_id="+productArray[i]['product_id']+" "+dispon+"> "+productArray[i]['product_name']+"</label>",
+            "</div>",
+            "<div class='col-xs-6>",
+              "<small> cant: </small>",
+              "<input type='number' id='qProduct"+productArray[i]['product_id']+"' placeholder='0000000' min='0' max ='9999999' size='7' class='productQty' style='width:100px;' "+dispon+"> <small>Und.</small>",
+              "<br>",
+            "</div>",
+          "</div>"); 
       i++;
     });
    

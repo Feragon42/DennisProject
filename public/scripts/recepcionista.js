@@ -6,7 +6,7 @@ $('.enableButtons').on('click', function(evt){
   
   $('#order'+orderNumber+' .editButtons').css('display', 'block');
   $(this).css('display', 'none');
-  $('#order'+orderNumber+' input[name="productSelect"]').attr('disabled', false);
+  $('#order'+orderNumber+' input[name="productSelect"] ').attr('disabled', false);
   $('#order'+orderNumber+' .productQty').attr('disabled', false);
 })
 

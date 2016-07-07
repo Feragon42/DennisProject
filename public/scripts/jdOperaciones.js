@@ -1,13 +1,14 @@
 //Edit order
-$('.jdOperaciones #orderEdit').on('click', function(evt){
+$('.jdPlanta #orderEdit').on('click', function(evt){
   var n = $(this).attr('order-number')
   var arrayProduct = [];
   var arrayQty = [];
-  $('.jdOperaciones #selectProductOrder'+n+' .productID').each(function(){
+  $('.jdPlanta #selectProductOrder'+n+' input[name="productSelect"]:checked').each(function(){
     var p_id = $(this).attr('product_id');
     arrayProduct.push(p_id);
-    var p_qty = $(".jdOperaciones #selectProductOrder"+n+" #qProduct"+p_id).attr('product_quantity');
+    var p_qty = $(".jdPlanta #selectProductOrder"+n+" #qProduct"+p_id).val();
     arrayQty.push(p_qty);
+    console.log('Tenemos '+p_qty+' de '+p_id)
   })
   
   $.ajax({ // AJAX para editar la orden en la tabla order.
@@ -16,7 +17,7 @@ $('.jdOperaciones #orderEdit').on('click', function(evt){
     data: {
       order_id: $(this).attr('order_id'),
       client_id: $(this).attr('client_id'),
-      status: 'En Produccion',
+      status: 'Revisado',
       product_order: arrayProduct,
       product_order_qty: arrayQty
     },
@@ -27,8 +28,9 @@ $('.jdOperaciones #orderEdit').on('click', function(evt){
   });
 });
 
-//Delete Order
-$('.jdOperaciones #orderDelete').on('click', function(){
+//Delete order
+$('.jdPlanta #orderDelete').on('click', function(){
+  var n=$(this).attr('order-number');
   $.ajax({
     type: "POST",
     url: "pages/deleteOrder",
@@ -41,13 +43,3 @@ $('.jdOperaciones #orderDelete').on('click', function(){
       function(){alert('Orden eliminada satisfactoriamente')}
   });
 });
-
-//Print Order 
-$(".jdOperaciones .printOrder").click(function(evt) {
-    evt.preventDefault();
-    var n = $(this).attr('order-number');
-    $(".jdOperaciones #order"+n).printThis({
-        debug: false
-    });
-});
-

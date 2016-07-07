@@ -25,7 +25,7 @@
                       
                       <!-Nombre de Producto>
                       <label>Nombre del Producto:</label>
-                      <input type='name' class='form-control' id="<?php echo 'inputNameProduct'.$i ?>" placeholder='<?php echo $productArray[$i]['product_name'] ?>'>
+                      <input type='name' class='form-control' id="<?php echo 'inputNameProduct'.$i ?>" value='<?php echo $productArray[$i]['product_name'] ?>'>
                       <br>
                       
                       <!-Tipo de Producto>
@@ -37,22 +37,25 @@
                       <br>
            
                       
-                      <!-Clientes para  el producto->
-                      <label>Clientes a los que se le ofrece el producto:</label><br>
-                      <?php
-                        $clientArray = $af->admin_functions->showData('client');
-                        $lengthP = count($clientArray);
-                        if($lengthP!=0){
-                          for($j=0;$j<$lengthP;$j++){
-                      ?>
-                          <label><input type='checkbox' name='clientSelect<?php echo $i ?>' value="<?php echo $clientArray[$j]['client_id'] ?>"><?php echo $clientArray[$j]['client_name'] ?></label><br>
-                      <?php
-                          }
-                        }
-                        else{
-                          echo "<h3>No hay productos que ofrecer</h3>";
-                        }
-                      ?>
+                      <!-Status->
+                        <label>Estado:</label>
+                        <select class='form-control' style='width:40%;' id="<?php echo 'inputStatusProduct'.$i ?>">
+                          <?php $productStatusArray = ['Disponible', 'No Disponible'];
+                            for($j=0;$j<count($productStatusArray);$j++){
+                          ?>
+                          <option value="<?php echo $productStatusArray[$j] ?>" <?php if($productStatusArray[$j]==$productArray[$i]['status']){echo 'selected';}?>>
+                            <?php echo $productStatusArray[$j] ?>
+                          </option>
+                          <?php
+                            }
+                          ?>
+                        </select>
+                        <br>
+                        
+                      <!-Proveedor de Producto>
+                      <label>Proveedor del Producto:</label>
+                      <input type='name' class='form-control' id="<?php echo 'inputSupplierProduct'.$i ?>" value='<?php echo $productArray[$i]['supplier'] ?>'>
+                      
                       
                       <!-Boton para enviar->
                       <br>
