@@ -15,8 +15,8 @@
                 
                 <label for='inputUserType'>Tipo de articulo: </label>
                 <select class='form-control' style='width:40%;' id='inputTypeProduct'>
-                  <option value='Liquido'>Liquido</option>
                   <option value='Solido'>Solido</option>
+                  <option value='Liquido'>Liquido</option>
                 </select>
                 
                 <br>

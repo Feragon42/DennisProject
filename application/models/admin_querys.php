@@ -245,5 +245,47 @@
       $infoArray=$this->db->query($query);
       return $infoArray;
     }
+    
+   //----------------------------------------------Funciones para la TIMELINE------------------------------------------------------//
+    
+    public function storeTimeLine($data){
+      $query="INSERT INTO timeline (date, username, action, object_id)
+              VALUES (CURRENT_TIMESTAMP(),
+                      '".$data['username']."',
+                      '".$data['action']."',
+                      '".$data['object_id']."');";
+      $this->db->query($query);
+    }
+    
+    public function extractTimeline(){
+      $query = "SELECT * FROM timeline ORDER BY date DESC";
+      $infoArray = $this->db->query($query);
+      return $infoArray;
+    }
+    
+    public function updateOrderTimeline(){
+      $query = "SELECT * FROM orderp";
+      $orderArray = $this->db->query($query);
+      
+      foreach($orderArray->result_array() as $order){
+        $query = "INSERT INTO orders_timeline (mod_date, order_id, order_status) 
+                  VALUES (NOW(), '".$order['orderp_id']."', '".$order['status']."')";
+        $this->db->query($query);
+      };
+    }
+    
+    public function showOrderList($data){
+      $query = "SELECT order_status, COUNT(*) FROM orders_timeline WHERE mod_date='".$data['date']."' GROUP BY order_status";
+      $orderArray = $this->db->query($query);
+      if($orderArra)
+        $iaLength=0;
+        foreach($orderArray->result_array() as $infoArray[$iaLength]){
+          $iaLength++;
+        };
+        echo json_encode($infoArray);
+     
+      
+      
+    }
   }
 ?>

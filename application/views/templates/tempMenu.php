@@ -27,5 +27,5 @@
         </tbody>
       </table>
     </div>
-    <label id='displayMenu'><small> Click para Mostrar / Ocultar lista de usuarios</small></label>
+   
   </body>

@@ -65,7 +65,20 @@ $('#userCreation').on('click', function(evt){
           dataType: "text",
           cache:false,
           success: 
-            function (){alert('Usuario creado satisfactoriamente')}
+            function (){
+              alert('Usuario creado satisfactoriamente');
+              $.ajax({
+                type: "POST",
+                url: "pages/timeline",
+                data: {
+                  username: $('#actualUsername').text(),
+                  action: 'creó al usuario',
+                  object_id: $('#inputName').val()
+                },
+                dataType: "text",
+                cache:false,
+              })
+            }
         });
       }
       else{
@@ -112,7 +125,20 @@ $('#editUser #userEdit').on('click', function(evt){
         dataType: "text",
         cache:false,
         success: 
-          function (){alert('Usuario editado satisfactoriamente')}
+          function (){
+            alert('Usuario editado satisfactoriamente');
+            $.ajax({
+                type: "POST",
+                url: "pages/timeline",
+                data: {
+                  username: $('#actualUsername').text(),
+                  action: 'editó al usuario',
+                  object_id: $('#user'+n+' #inputUser'+n).val()
+                },
+                dataType: "text",
+                cache:false,
+              })
+          }
       });
     }
     else{
@@ -144,6 +170,19 @@ $('#deleteUser #userDelete').on('click', function(){
     dataType: "text",
     cache:false,
     success:
-      function(){alert('Usuario desactivado satisfactoriamente')}
+      function(){
+        alert('Usuario desactivado satisfactoriamente');
+        $.ajax({
+                type: "POST",
+                url: "pages/timeline",
+                data: {
+                  username: $('#actualUsername').text(),
+                  action: 'desactivo al usuario',
+                  object_id: $('#deleteUser #username'+n).text()
+                },
+                dataType: "text",
+                cache:false,
+              })
+      }
   });
 });

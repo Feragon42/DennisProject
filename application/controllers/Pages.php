@@ -45,6 +45,7 @@
       }
       $this->load->view('modals/adminModals/statistics', $data);
       if($page=='admin'){
+        $this->load->view('modals/adminModals/timeline', $data);
         $this->load->view('modals/adminModals/createUser', $data);
         $this->load->view('modals/adminModals/createClient', $data);
         $this->load->view('modals/adminModals/editUser', $data);
@@ -73,6 +74,7 @@
       if($loginData == TRUE){ //Se ve si se realizo un login correcto (Usuario y contrasena coinciden).
         $x = $this->user_database->extractUserInfo($data); //Se usa el metodo de model/user_database para extraer la informacion de usuario de la base de datos.
         if($x['status']=='Activo'){//Se comprueba si el usuario esta activo
+          
           if($x['userType']=='Administrador'){ //Se redirecciona a la pagina correspondiente segun el usuario registrado.
             echo "<script> window.location.href='".base_url()."admin' </script>";
           }
@@ -86,6 +88,16 @@
             echo "<script> window.location.href='".base_url()."jdOperaciones' </script>";
           }
           $this->session->set_userdata($x); //Se crea la sesion con la informacion extraida de la base de datos.
+          //Se crea el array DATA y se manda a una funcion para que almacenen en la base de datos el inicio de sesion
+          $uData = $this->session->all_userdata();
+          $data = array(
+            'username'=>$uData['name'],
+            'action'=>'inició sesión.',
+            'object_id'=>''
+          );
+          $this->load->model('admin_querys');
+          $this->admin_querys->storeTimeLine($data);
+          
         }
         else{
           echo "<script> alert ('El Usuario esta inactivo. Contacte con administrador') 
@@ -103,6 +115,17 @@
     
     public function logout(){ //Funcion que destruye el array asociativo de la sesion (Cierra la sesion), y redirecciona a login.
       $this->load->library('session');
+      
+      //Antes de eliminar la sesion, se almacena el logout
+      $uData = $this->session->all_userdata();
+      $data = array(
+            'username'=>$uData['name'],
+            'action'=>'cerro sesión.',
+            'object_id'=>''
+          );
+      $this->load->model('admin_querys');
+      $this->admin_querys->storeTimeLine($data);
+      
       $this->session->sess_destroy();
       echo "<script> window.location.href='".base_url()."' </script>";
     }
@@ -196,6 +219,23 @@
       $this->load->model('admin_querys');
       header('Content-Type: application/json');
       echo json_encode($this->admin_querys->takeAllProductForClient($_POST), JSON_FORCE_OBJECT);
+    }
+    
+    //------------------------------------------Funciones para crear TIMELINE------------------------------------------//\
+    
+    public function timeline(){
+      $this->load->model('admin_querys');
+      $this->admin_querys->storeTimeLine($_POST);
+    }
+    
+    public function updateOrderTimeline(){
+      $this->load->model('admin_querys');
+      $this->admin_querys->updateOrderTimeline();
+    }
+    
+    public function showOrderList(){
+      $this->load->model('admin_querys');
+      $this->admin_querys->showOrderList($_POST);
     }
   }
 ?>

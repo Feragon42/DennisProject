@@ -35,7 +35,20 @@ $('.recepcionista #orderEdit').on('click', function(evt){
     dataType: "text",
     cache:false,
     success: 
-      function (){alert('Orden editada satisfactoriamente')}
+      function (){
+        alert('Orden editada satisfactoriamente');
+        $.ajax({
+          type: "POST",
+          url: "pages/timeline",
+          data: {
+            username: $('#actualUsername').text(),
+            action: 'editó la orden',
+            object_id: $('.recepcionista #orderEdit').attr('order_id')
+          },
+          dataType: "text",
+          cache:false,
+        })
+      }
   });
 });
 
@@ -51,6 +64,19 @@ $('.recepcionista #orderDelete').on('click', function(){
     dataType: "text",
     cache:false,
     success:
-      function(){alert('Orden eliminada satisfactoriamente')}
+      function(){
+        alert('Orden eliminada satisfactoriamente');
+        $.ajax({
+          type: "POST",
+          url: "pages/timeline",
+          data: {
+            username: $('#actualUsername').text(),
+            action: 'eliminó la orden',
+            object_id: $('.recepcionista #orderDelete').attr('order_id')
+          },
+          dataType: "text",
+          cache:false,
+        })
+      }
   });
 });

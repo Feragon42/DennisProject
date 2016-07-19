@@ -90,7 +90,7 @@
                       
                       <!-Boton para enviar->
                       <br>
-                        <button class='btn btn-primary btn-group-xs' id='clientEdit' client_number="<?php echo $i ?>" client_id="<?php echo $clientArray[$i]['client_id'] ?>">Editar Cliente</button>
+                        <button class='btn btn-primary btn-group-xs' id='clientEdit' client_number="<?php echo $i ?>" client_id="<?php echo $clientArray[$i]['client_id'] ?>">Guardar Cambios</button>
                     </form>                      
                   </div>
                   <hr> 

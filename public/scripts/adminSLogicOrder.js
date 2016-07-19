@@ -65,7 +65,20 @@ $('#createOrder #orderCreation').on('click', function(evt){
     dataType: "text",
     cache:false,
     success: 
-      function (){alert('Orden creada satisfactoriamente'); location.reload();}
+      function (){
+        alert('Orden creada satisfactoriamente'); location.reload();
+        $.ajax({
+          type: "POST",
+          url: "pages/timeline",
+          data: {
+            username: $('#actualUsername').text(),
+            action: 'creó una orden nueva',
+            object_id: ''
+          },
+          dataType: "text",
+          cache:false,
+        })
+      }
   });
 });
 
@@ -102,7 +115,20 @@ $('#editOrder #orderEdit').on('click', function(evt){
     dataType: "text",
     cache:false,
     success: 
-      function (){alert('Orden editada satisfactoriamente')}
+      function (){
+        alert('Orden editada satisfactoriamente');
+        $.ajax({
+          type: "POST",
+          url: "pages/timeline",
+          data: {
+            username: $('#actualUsername').text(),
+            action: 'editó la orden',
+            object_id: $('#editOrder #orderEdit').attr('order_id')
+          },
+          dataType: "text",
+          cache:false,
+        })
+      }
   });
   
   
@@ -128,6 +154,19 @@ $('#deleteOrder #orderDelete').on('click', function(){
     dataType: "text",
     cache:false,
     success:
-      function(){alert('Orden eliminada satisfactoriamente')}
+      function(){
+        alert('Orden eliminada satisfactoriamente');
+         $.ajax({
+          type: "POST",
+          url: "pages/timeline",
+          data: {
+            username: $('#actualUsername').text(),
+            action: 'eliminó la orden',
+            object_id: $('#deleteOrder #orderID'+n).text()
+          },
+          dataType: "text",
+          cache:false,
+        })
+      }
   });
 });

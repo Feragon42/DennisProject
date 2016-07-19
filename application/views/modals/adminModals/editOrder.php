@@ -100,7 +100,7 @@
                         <button class='btn btn-primary btn-group-xs' id='orderEdit' 
                         order_number="<?php echo $i ?>" 
                         order_id="<?php echo $orderArray[$i]['orderp_id'] ?>"
-                        client_id="<?php echo $orderArray[$i]['client_id'] ?>">Editar Order</button>
+                        client_id="<?php echo $orderArray[$i]['client_id'] ?>">Guardar Cambios</button>
                     </form>                      
                   </div>
                   <hr> 

@@ -20,7 +20,20 @@ $('#createClient #clientCreation').on('click', function(evt){
       dataType: "text",
       cache:false,
       success: 
-        function (){alert('Cliente creado satisfactoriamente')}
+        function (){
+          alert('Cliente creado satisfactoriamente');
+          $.ajax({
+            type: "POST",
+            url: "pages/timeline",
+            data: {
+              username: $('#actualUsername').text(),
+              action: 'creó el cliente',
+              object_id: $('#inputNameClient').val()
+            },
+            dataType: "text",
+            cache:false,
+          })
+        }
     });
   }
   else{
@@ -63,7 +76,20 @@ $('#editClient #clientEdit').on('click', function(evt){
       dataType: "text",
       cache:false,
       success: 
-        function (){alert('Cliente editado satisfactoriamente')}
+        function (){
+          alert('Cliente editado satisfactoriamente');
+           $.ajax({
+            type: "POST",
+            url: "pages/timeline",
+            data: {
+              username: $('#actualUsername').text(),
+              action: 'editó el cliente',
+              object_id: $('#client'+n+' #inputNameClient'+n).val()
+            },
+            dataType: "text",
+            cache:false,
+          })
+        }
     });
   }
   else{
@@ -90,6 +116,19 @@ $('#deleteClient #clientDelete').on('click', function(){
     dataType: "text",
     cache:false,
     success:
-      function(){alert('Cliente eliminado satisfactoriamente')}
+      function(){
+        alert('Cliente eliminado satisfactoriamente');
+        $.ajax({
+            type: "POST",
+            url: "pages/timeline",
+            data: {
+              username: $('#actualUsername').text(),
+              action: 'eliminó el cliente',
+              object_id: $('#deleteClient #clientName'+n).text()
+            },
+            dataType: "text",
+            cache:false,
+          })
+      }
   });
 });

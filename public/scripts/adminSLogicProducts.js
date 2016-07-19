@@ -13,7 +13,20 @@ $('#productCreation').on('click', function(evt){
       dataType: "text",
       cache:false,
       success: 
-        function (){alert('Producto creado satisfactoriamente')}
+        function (){
+          alert('Producto creado satisfactoriamente');
+          $.ajax({
+            type: "POST",
+            url: "pages/timeline",
+            data: {
+              username: $('#actualUsername').text(),
+              action: 'creó el producto',
+              object_id: $('#inputNameProduct').val()
+            },
+            dataType: "text",
+            cache:false,
+          })
+        }
     });
   }
   else{
@@ -49,7 +62,20 @@ $('#editProduct #productEdit').on('click', function(evt){
       dataType: "text",
       cache:false,
       success: 
-        function (){alert('Producto editado satisfactoriamente')}
+        function (){
+          alert('Producto editado satisfactoriamente');
+          $.ajax({
+            type: "POST",
+            url: "pages/timeline",
+            data: {
+              username: $('#actualUsername').text(),
+              action: 'editó el producto',
+              object_id: $('#product'+n+' #inputNameProduct'+n).val()
+            },
+            dataType: "text",
+            cache:false,
+          })
+        }
     });
   }
   else{
@@ -78,6 +104,19 @@ $('#deleteProduct #productDelete').on('click', function(){
     dataType: "text",
     cache:false,
     success:
-      function(){alert('Producto eliminado satisfactoriamente')}
+      function(){
+        alert('Producto eliminado satisfactoriamente');
+        $.ajax({
+          type: "POST",
+          url: "pages/timeline",
+          data: {
+            username: $('#actualUsername').text(),
+            action: 'eliminó el producto',
+            object_id: $('#deleteProduct #productName'+n).text()
+          },
+          dataType: "text",
+          cache:false,
+        })
+      }
   });
 });

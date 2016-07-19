@@ -9,8 +9,8 @@
     <!--Import Bootstrap CSS--> 
     <link href='public/stylesheets/bootstrap.css', rel='stylesheet'>
     <!--Import custom CSS--> 
-    <link href='public/stylesheets/generalStyle.css', rel='stylesheet'>
-    <link href='public/stylesheets/adminModals.css', rel='stylesheet'>
+    <link href='public/stylesheets/generalStyle.css' rel='stylesheet'>
+    <link href='public/stylesheets/adminModals.css' rel='stylesheet'>
   </head>
   
   <body>

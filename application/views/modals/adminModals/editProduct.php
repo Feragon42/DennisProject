@@ -59,7 +59,7 @@
                       
                       <!-Boton para enviar->
                       <br>
-                        <button class='btn btn-primary btn-group-xs' id='productEdit' product_number="<?php echo $i ?>" product_id="<?php echo $productArray[$i]['product_id'] ?>">Editar Producto</button>
+                        <button class='btn btn-primary btn-group-xs' id='productEdit' product_number="<?php echo $i ?>" product_id="<?php echo $productArray[$i]['product_id'] ?>">Guardar Cambios</button>
                     </form>                      
                   </div>
                   <hr> 

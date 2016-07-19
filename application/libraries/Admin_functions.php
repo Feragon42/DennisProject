@@ -37,5 +37,13 @@
       $info = $t->admin_querys->productNumbers();
       return $info;
     }
+    
+    /*-----------------------------------------Funciones para TIMELINE-----------------------------------------------------*/
+    public function showTimeline(){
+      $t =& get_instance();
+      $t->load->model('admin_querys');
+      $infoArray = $t->admin_querys->extractTimeline();
+      return $infoArray;
+    }
   }
 ?>

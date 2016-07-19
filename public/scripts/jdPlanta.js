@@ -23,7 +23,20 @@ $('.jdOperaciones #orderEdit').on('click', function(evt){
     dataType: "text",
     cache:false,
     success: 
-      function (){alert('Orden editada satisfactoriamente')}
+      function (){
+        alert('Orden enviada satisfactoriamente');
+        $.ajax({
+          type: "POST",
+          url: "pages/timeline",
+          data: {
+            username: $('#actualUsername').text(),
+            action: 'pasó a producción la orden',
+            object_id: $('.jdOperaciones #orderEdit').attr('order_id')
+          },
+          dataType: "text",
+          cache:false,
+        })
+      }
   });
 });
 
@@ -39,7 +52,20 @@ $('.jdOperaciones #orderComplete').on('click', function(){
     dataType: "text",
     cache:false,
     success:
-      function(){alert('Orden finalizada satisfactoriamente')}
+      function(){
+        alert('Orden finalizada satisfactoriamente');
+        $.ajax({
+          type: "POST",
+          url: "pages/timeline",
+          data: {
+            username: $('#actualUsername').text(),
+            action: 'finalizó la orden',
+            object_id: $('.jdOperaciones #orderComplete').attr('order_id')
+          },
+          dataType: "text",
+          cache:false,
+        })
+      }
   });
 });
 
@@ -51,7 +77,9 @@ $(".jdOperaciones .printOrder").click(function(evt) {
         debug: false,
         importCSS: false,
         importStyle: true,
-        loadCSS: "public/stylesheets/printStyle.css",
+        //Enrutamiento online
+        //loadCSS: "public/stylesheets/printStyle.css",
+        loadCSS: "dennys/public/stylesheets/printStyle.css",
         pageTitle: "Reporte de Produccion"
     });
 });

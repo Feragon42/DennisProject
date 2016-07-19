@@ -58,18 +58,14 @@
                 //Si el id del producto del cliente coinciden con el id del producto registrado en la orden, lo marco como checked
                 if($productClientArray[$j]['product_id'] == $productOrderArray[$k]['product_id']){
           ?>
-                  <div class='col-xs-12'>
-                    <div class='col-xs-6'>
-                      <label><input type='checkbox' name='productSelect' product_id="<?php echo $productClientArray[$j]['product_id']?>" class='disponible' checked > 
-                        <?php echo $productName[0]['product_name']?>
-                      </label>
-                    </div>
-                    <div class='col-xs-6'>
-                      <small> cant: </small>
-                      <input type='number' id="<?php echo 'qProduct'.$productClientArray[$j]['product_id']?>" 
-                        placeholder='0000000' min='0' max ='9999999' size='7'  style='width:80px;' class='productQty' value="<?php echo $productOrderArray[$k]['quantity']?>" >
-                      <small> Und. </small>
-                    </div>
+                  <div>
+                    <label style='width:50%;'><input type='checkbox' name='productSelect' product_id="<?php echo $productClientArray[$j]['product_id']?>" class='disponible' checked > 
+                      <?php echo $productName[0]['product_name']?>
+                    </label>
+                    <small> cant: </small>
+                    <input type='number' id="<?php echo 'qProduct'.$productClientArray[$j]['product_id']?>" 
+                      placeholder='0000000' min='0' max ='9999999' size='7'  style='width:80px;' class='productQty' value="<?php echo $productOrderArray[$k]['quantity']?>" >
+                    <small> Und. </small>
                   </div>
           <?php
                   $proceed = false; //<-- E indico que no vuelva a imprimir este producto
@@ -78,19 +74,15 @@
               if($proceed){ //<-- Si el producto no cumple para pasar por el if, igual se imprime pero sin el checked
               
           ?>
-                <div class='col-xs-12'>
-                  <div class='col-xs-6'>
-                    <label><input type='checkbox' name='productSelect' product_id="<?php echo $productClientArray[$j]['product_id']?>" 
-                      <?php echo $dispon ?>> 
-                      <?php echo $productName[0]['product_name']?>
-                    </label>
-                  </div>
-                  <div class='col-xs-6'>
-                    <small> cant: </small>
-                    <input type='number' id="<?php echo 'qProduct'.$productClientArray[$j]['product_id']?>" 
+                <div>
+                  <label style='width:50%;'><input type='checkbox' name='productSelect' product_id="<?php echo $productClientArray[$j]['product_id']?>" 
+                    <?php echo $dispon ?>> 
+                    <?php echo $productName[0]['product_name']?>
+                  </label>
+                  <small> cant: </small>
+                  <input type='number' id="<?php echo 'qProduct'.$productClientArray[$j]['product_id']?>" 
                     placeholder='0000000' min='0' max ='9999999' size='7'  style='width:80px;' class='productQty' <?php echo $dispon ?>>
-                    <small> Und. </small>
-                  </div>
+                  <small> Und. </small>
                 </div>
           <?php
               }

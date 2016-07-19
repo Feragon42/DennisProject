@@ -16,7 +16,10 @@
   ?>
       <div id="<?php echo 'order'.$i?>" class='order col-lg-4'>
         <div class='printHeader'>
-          <img src='public/images/logo.png'><br>
+          <!--Online
+          <img src='public/images/logo.png'><br><br><br>
+          -->
+          <img src='dennys/public/images/logo.png'><br><br><br>
         </div>
         <form method='POST' class='form-horizontal'>
           
@@ -49,7 +52,7 @@
           ?>
                 <li>
                   <div>
-                    <label class='productID' product_id="<?php echo $productOrderArray[$j]['product_id']?>">
+                    <label class='productID' product_id="<?php echo $productOrderArray[$j]['product_id']?>" style='width:40%;'>
                       <?php echo $productName[0]['product_name']?>
                     </label>
                     <small> cant: </small>

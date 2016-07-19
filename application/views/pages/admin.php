@@ -1,6 +1,7 @@
 
   <button class='btn btn-primary' id='showStatistics' data-toggle='modal' data-target='#statistics'>Mostrar Estadisticas</button>
-    
+  <button class='btn btn-primary' id='showTimeLine' data-toggle='modal' data-target='#timeline'>Mostrar Lista de Acciones</button>
+  <button class='btn btn-primary' id='testDay'>Prueba Cargar Dia</button>
     <div id='actionsMenu'>
       
       <div class='col-lg-3 col-xs-6 actionList'>
